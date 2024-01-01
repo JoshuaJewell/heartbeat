@@ -8,27 +8,43 @@ import subprocess
 from datetime import datetime, timedelta
 
 # ECG heartbeat pattern: commits per day for one cycle
-# Pattern based on the ideal SVG: 3-4 beats per year
-# Each beat cycle = ~90-120 days for proper spacing
-# Baseline=1, P-wave=2, Dip=0, QRS spike=15-20, Recovery=0, then long baseline
+# CRITICAL: GitHub aggregates by WEEK. The SVG shows WEEKLY totals, not daily!
+# Ideal SVG: baseline=5/week, P-wave=7/week, spike=15/week, recovery=0/week
+# Strategy: Spread commits across days to achieve desired weekly totals
+# Each beat cycle = ~18 weeks (126 days) for 3 beats per year
+
 HEARTBEAT_PATTERN = [
-    1, 1, 1, 1, 1, 1, 1,  # Week 1: baseline
-    1, 1, 1, 1, 1, 1, 1,  # Week 2: baseline
-    1, 1, 1, 1, 1, 1, 1,  # Week 3: baseline
-    1, 1, 1, 1, 1, 1, 1,  # Week 4: baseline
-    1, 1, 1, 1, 1, 1, 1,  # Week 5: baseline
-    1, 1, 1, 1, 1, 1, 1,  # Week 6: baseline
-    1, 1, 1, 1, 1, 1, 1,  # Week 7: baseline
-    1, 1, 1, 1, 1, 1, 1,  # Week 8: baseline
-    1, 1, 1, 1, 1, 1, 1,  # Week 9: baseline
-    1, 1, 1, 1, 1, 1, 1,  # Week 10: baseline
-    1, 1, 1, 1, 1, 1, 1,  # Week 11: baseline
-    1, 1, 1, 1, 1, 1, 1,  # Week 12: baseline
-    1, 1, 2, 2, 1, 0, 0,  # Week 13: P-wave and dip before spike
-    20, 0, 1, 1, 1, 1, 1, # Week 14: SPIKE then recovery to baseline
-    1, 1, 1, 1, 1, 1, 1,  # Week 15: baseline
-    1, 1, 1, 1, 1, 1, 1,  # Week 16: baseline
-    1, 1, 1, 1, 1, 1, 1,  # Week 17: baseline (cycle = 119 days ~4 months)
+    # Baseline weeks: ~5 commits total = spread 1 commit across the week
+    0, 0, 0, 1, 0, 0, 0,  # Week 1: baseline
+    0, 0, 1, 0, 0, 0, 0,  # Week 2: baseline
+    0, 0, 0, 0, 1, 0, 0,  # Week 3: baseline
+    0, 1, 0, 0, 0, 0, 0,  # Week 4: baseline
+    0, 0, 0, 1, 0, 0, 0,  # Week 5: baseline
+    0, 0, 0, 0, 0, 1, 0,  # Week 6: baseline
+    0, 0, 1, 0, 0, 0, 0,  # Week 7: baseline
+    0, 0, 0, 0, 1, 0, 0,  # Week 8: baseline
+    0, 1, 0, 0, 0, 0, 0,  # Week 9: baseline
+
+    # P-wave week: ~7 commits = 1 per day
+    1, 1, 1, 1, 1, 1, 1,  # Week 10: P-wave
+
+    # Pre-spike baseline
+    0, 0, 1, 0, 0, 0, 0,  # Week 11: baseline
+
+    # Dip week: ~2 commits
+    0, 0, 1, 0, 0, 1, 0,  # Week 12: dip
+
+    # SPIKE week: ~15 commits on one day
+    0, 0, 0, 15, 0, 0, 0,  # Week 13: SPIKE!
+
+    # Recovery week: 0 commits
+    0, 0, 0, 0, 0, 0, 0,  # Week 14: recovery
+
+    # Return to baseline
+    0, 0, 0, 1, 0, 0, 0,  # Week 15: baseline
+    1, 0, 0, 0, 0, 0, 0,  # Week 16: baseline
+    0, 0, 1, 0, 0, 0, 0,  # Week 17: baseline
+    0, 0, 0, 0, 0, 1, 0,  # Week 18: baseline
 ]
 
 def generate_commit_dates(start_date, end_date, pattern):
