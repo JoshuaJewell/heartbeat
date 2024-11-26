@@ -1,10 +1,9 @@
-[](./heartbeat.svg)
-<img src="./heartbeat.svg">
-
 # Questions nobody has asked me:
 
 ## What is this?
 Well, I decided to see if the GitHub repo activity monitor can be easily affected by a script to upload commits on a daily basis. My intention is to create something that resembles an ECG reading over the course of a year through automatic commits using a shell script.
+
+![The goal](./heartbeat.svg)
 
 ## Why is this?
 That's a good question.
