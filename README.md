@@ -1,3 +1,6 @@
+[](./heartbeat.svg)
+<img src="./heartbeat.svg">
+
 # Questions nobody has asked me:
 
 ## What is this?
