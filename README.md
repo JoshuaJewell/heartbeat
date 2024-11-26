@@ -6,7 +6,7 @@ Well, I decided to see if the GitHub repo activity monitor can be easily affecte
 ![The goal](./heartbeat.svg)
 
 ## Why is this?
-That's a good question.
+Tell you what you wanna know; So what's a little [Vertigo](https://youtu.be/soNC1LS0vnI)?
 
 ## How can I is this?
 Given that I haven't done it myself yet...well...don't expect results until you see them on this repo. I have chmodded heartbeat.sh and created the following cron job:
