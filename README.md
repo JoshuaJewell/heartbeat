@@ -3,7 +3,7 @@
 ## What is this?
 Well, I decided to see if the GitHub repo activity monitor can be easily affected by a script to upload commits on a daily basis. My intention is to create something that resembles an ECG reading over the course of a year through automatic commits using a shell script.
 
-![The goal](./heartbeat.svg)
+![Proof of concept](./previews/heartbeat.png)
 
 ## Why is this?
 Tell you what you wanna know; So what's a little [Vertigo](https://youtu.be/soNC1LS0vnI)?
